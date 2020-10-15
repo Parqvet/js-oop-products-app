@@ -17,21 +17,21 @@ class UI {
                     <strong>Product Name</strong>: ${product.name}
                     <strong>Product Price</strong>: ${product.price}
                     <strong>Product Year</strong>: ${product.year}
+                    <a href="#" class="btn btn-danger" name="delete">Delete</a>
                 </div>
             </div>
         `;
         productList.appendChild(element);
-        // Luego de que se agregue el producto quiero que lo resetee
-        // Lo llamo desde esta misma clase su metodo resetForm
-        this.resetForm();
     }
 
     resetForm() {
         document.getElementById('product-form').reset();
     }
 
-    deleteProduct() {
-
+    deleteProduct(element) {
+        if(element.name === 'delete') {
+            element.parentElement.parentElement.parentElement.remove();
+        }
     }
 
     showMessage() {
@@ -52,6 +52,14 @@ function funcEvent(e) {
     // Creamos una nueva instancia de la clase UI, una vez creada me da un objeto con el metodo del html creado
     const ui = new UI();
     ui.addProduct(product);
+    ui.resetForm();
 
     e.preventDefault();
+}
+
+document.getElementById('product-list').addEventListener('click', deleteEvent);
+
+function deleteEvent(e) {
+    const ui = new UI;
+    ui.deleteProduct(e.target);
 }
