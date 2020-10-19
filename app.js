@@ -34,8 +34,19 @@ class UI {
         }
     }
 
-    showMessage() {
-
+    showMessage(message, cssClass) {
+        const div = document.createElement('div');
+        div.className = `alert alert-${cssClass} mt-3`;
+        div.appendChild(document.createTextNode(message));
+        // Mostrando en el DOM
+        const container = document.querySelector('.container');
+        document.querySelector('#app');
+        container.insertBefore(div, app);
+        // LLamamos al evento setTimeut luego de insertar el elemento
+        // Para removerlo luego de 3 segundos
+        setTimeout(function() {
+            document.querySelector('.alert').remove();
+        }, 3000)
     }
 }
 
@@ -53,6 +64,7 @@ function funcEvent(e) {
     const ui = new UI();
     ui.addProduct(product);
     ui.resetForm();
+    ui.showMessage('Product Added Succesfully', 'success');
 
     e.preventDefault();
 }
