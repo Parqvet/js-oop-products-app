@@ -31,6 +31,7 @@ class UI {
     deleteProduct(element) {
         if(element.name === 'delete') {
             element.parentElement.parentElement.parentElement.remove();
+            this.showMessage('Product Deleted Successfuly', 'danger');
         }
     }
 
@@ -62,6 +63,11 @@ function funcEvent(e) {
 
     // Creamos una nueva instancia de la clase UI, una vez creada me da un objeto con el metodo del html creado
     const ui = new UI();
+
+    if (name === '' || price === '' || year === '') {
+        return ui.showMessage('Complete Fields Please', 'danger');
+    }
+    
     ui.addProduct(product);
     ui.resetForm();
     ui.showMessage('Product Added Succesfully', 'success');
